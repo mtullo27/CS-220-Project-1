@@ -1,30 +1,30 @@
 #include <stdio.h>
 
-Struct card{
+Struct Card{
   char c;
   int val;
 }
 
-Struct hand{
-  card a;
-  card b;
-  card c;
-  card d;
-  card e;
+Struct Hand{
+  card h[5];
+  card high;
   int total;
 }
 
-Struct player{
+Struct Player{
   card c1;
   card c2;
+  card high;
   hand h;
   int total;
 }
 
-Struct pile{
-  card a;
-  card b;
-  card c; 
-  card d;
-  card e;
+Struct Pile{
+  card p[5];
+  card high;
 }
+
+#define Struct Card card;
+#define Struct Hand hand;
+#define Struct Player player;
+#define Struct Pile pile;
