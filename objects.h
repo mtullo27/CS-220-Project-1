@@ -12,11 +12,10 @@ Struct Hand{
 }
 
 Struct Player{
-  card c1;
-  card c2;
-  card high;
+  card c[2];
   hand h;
   int total;
+  crad high;
 }
 
 Struct Pile{
