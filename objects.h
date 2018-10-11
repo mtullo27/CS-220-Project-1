@@ -27,3 +27,7 @@ Struct Pile{
 #define Struct Hand hand;
 #define Struct Player player;
 #define Struct Pile pile;
+
+player[3] sort_players(player p1, player p2, player p3);
+hand get_highest(player p, pile p);
+void print_results(player p1, player p2, player p3);
