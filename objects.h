@@ -8,7 +8,6 @@ enum Card{2,3,4,5,6,7,8,9,10,J,K,Q,A};
 //be the designated value for the hand and a high card 
 Struct Hand{
   card h[5];
-  card high;
   int total;
 }
 
@@ -17,13 +16,12 @@ Struct Player{
   card c[2];
   hand h;
   int total;
-  card high = hand.high;
+  card high;
 }
 
 //The "river" five cards and the high card
 Struct Pile{
   card p[5];
-  card high;
 }
 
 //define for the structures
