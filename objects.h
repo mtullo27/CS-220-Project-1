@@ -2,8 +2,10 @@
 
 //enumerator sets value for different cards
 //2 is 1, 3 is 2, 4 is 3 ect
-enum Card{2,3,4,5,6,7,8,9,10,J,K,Q,A};
-
+//suit is set to a chat
+Struct Card{
+  enum {2,3,4,5,6,7,8,9,10,J,K,Q,A}cards;
+  char suit;
 //Hand consists of an array of five cards, a total which is going to 
 //be the designated value for the hand and a high card 
 Struct Hand{
