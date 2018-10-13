@@ -6,7 +6,7 @@ player[3] sort_players(player p1, player p2, player p3){
   int i,j;
   for(i = 0; i<sizeof(ret)-1; i++){
     for(j = 0; j<sizeof(ret)-i-1; j++){
-      if(ret[j]> ret[j+1]){
+      if(ret[j].val> ret[j+1].val){
         temp = ret[j];
         ret[j] = ret[j+1];
         ret[j+1] = temp;
