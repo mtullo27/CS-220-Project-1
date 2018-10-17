@@ -112,12 +112,12 @@ int three(hand handy){
     return 0;
 } 
 
-//Returns 1 if hand is only one pair and 0 otherwise
+//Returns value of pair if hand is only one pair and 0 otherwise
 int soloPair(hand handy){
-  int i,j;
+  int i;
   for(i = 0; i<4; i++){
     if(handy.h[i].rank == handy.h[i+1].rank)
-      return 1;
+      return handy.h[i].rank;
   }
   return 0;
 }
@@ -133,17 +133,22 @@ int indexPair(hand handy){
   }
   return r;
 }
-//Returns 1 if two pairs and 0 otherwise
+
+//Returns higher value of the pairs if two pairs and 0 otherwise
 int doublePair(hand handy){
-  int i;
+  int i,int high;
   if(soloPair(handy)){
     if(indexPair(handy) == 4 || indexPair(handy) == 5)
       return 0;
     for(i = indexPair(handy);i<4; i++){
        if(handy.h[i].rank == handy.h[i+1].rank){
-         return 1;
+         high = handy.h[i].rank;
        }
     }
+    if(high<soloPair(handy))
+      return soloPair(handy))
+    else 
+      return high;
   }
   return 0;
 }
@@ -184,32 +189,31 @@ card highCard(pile piley, player playery){
 //returns 0 if only high card
 int getValue(player playery){
   hand handy = playery.h;
-  int highy = playery.high.rank;
   if(straight(handy)){
     if(straightFlush(handy)){
       if(royalFlush(handy))
-        return 135+highy;
-      return 120+highy;
+        return 135;
+      return 120;
      }
-  return 60+highy;
+  return 60;
   }
   if(soloPair(handy)){
     if(doublePair(handy))
-      return 30+highy;
-    return 15+highy;
+      return 30+doublePair(handy);
+    return 15+soloPair(handy);
   }
   if(three(handy)){
     if(fullHouse(handy))
-      return 90+highy;
-    return 45+highy;
+      return 90;
+    return 45;
   }
   if(four(handy)){
-    return 105+highy;
+    return 105;
   }
   if(flush(handy)){
-    return 75+highy;
+    return 75;
   }
-  return highy;
+  return 0;
 }
 
 int main(){
