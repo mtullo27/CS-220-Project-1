@@ -410,6 +410,57 @@ int main(){
 	makehands(ca8, 7, 5, hands8);
 	hand hands9[21];
 	makehands(ca9, 7, 5, hands9);
+	int z;
+	for(z = 0; z<21; z++){
+		sort_Hand(hands1[z]);	
+		sort_Hand(hands2[z]);
+		sort_Hand(hands3[z]);
+		sort_Hand(hands4[z]);
+		sort_Hand(hands5[z]);
+		sort_Hand(hands6[z]);
+		sort_Hand(hands7[z]);
+		sort_Hand(hands8[z]);
+		sort_Hand(hands9[z]);
+	}	
+	p1.h = pick_hand(hands1);
+	p2.h = pick_hand(hands2);
+	p3.h = pick_hand(hands3);
+	p4.h = pick_hand(hands4);
+	p5.h = pick_hand(hands5);
+	p6.h = pick_hand(hands6);
+	p7.h = pick_hand(hands7);
+	p8.h = pick_hand(hands8);
+	p9.h = pick_hand(hands9);
+	
+	p1.high = p1.hand.h[4];
+	p2.high = p2.hand.h[4];
+	p3.high = p3.hand.h[4];
+	p4.high = p4.hand.h[4];
+	p5.high = p5.hand.h[4];
+	p6.high = p6.hand.h[4];
+	p7.high = p7.hand.h[4];
+	p8.high = p8.hand.h[4];
+	p9.high = p9.hand.h[4];
+
+	p1.hand.total = getValue(p1.hand);
+	p2.hand.total = getValue(p2.hand);
+	p3.hand.total = getValue(p3.hand);
+	p4.hand.total = getValue(p4.hand);
+	p5.hand.total = getValue(p5.hand);
+	p6.hand.total = getValue(p6.hand);
+	p7.hand.total = getValue(p7.hand);
+	p8.hand.total = getValue(p8.hand);
+	p9.hand.total = getValue(p9.hand);
+	
+	p1.id = 1;
+	p4.id = 1;
+	p7.id = 1;
+	p2.id = 2;
+	p5.id = 2;
+	p8.id = 2;
+	p3.id = 3;
+	p6.id = 3;
+	p9.id = 9;
 	
 	card cardy;
   card cardy2;
