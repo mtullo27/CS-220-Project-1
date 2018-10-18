@@ -6,13 +6,22 @@ void sort_players(player players[3]){
   player temp;
   int i,j;
   for(i = 0; i<2; i++){
-    for(j = 0; j<3-i-1; j++){
-      if(players[j].total> players[j+1].total){
-        temp = players[j];
-        players[j] = players[j+1];
-        players[j+1] = temp;
-      }
-    }
+    for(j=0; j<2-i; j++){
+			if(players[j].total == players[j+1].total){
+				if(players[j].h.h[0].rank>players[j+1].h.h[0].rank){
+					temp = players[j];
+          players[j] = players[j+1];
+          players[j+1] = temp;
+				}
+			}
+			else{
+				if(players[j].total > players[j+1].total){
+					temp = players[j];
+          players[j] = players[j+1];
+          players[j+1] = temp;
+				}
+			}
+		}
   }
 }
 
@@ -25,7 +34,7 @@ void sort_hand(hand p){
       if(p.h[j].rank<p.h[j+1].rank){
         temp = p.h[j];
         p.h[j] = p.h[j+1];
-	p.h[j+1] = temp;
+				p.h[j+1] = temp;
       } 
     }
   }
@@ -136,7 +145,7 @@ int indexPair(hand handy){
 
 //Returns higher value of the pairs if two pairs and 0 otherwise
 int doublePair(hand handy){
-  int i,int high;
+  int i,high;
   if(soloPair(handy)){
     if(indexPair(handy) == 4 || indexPair(handy) == 5)
       return 0;
@@ -145,10 +154,10 @@ int doublePair(hand handy){
          high = handy.h[i].rank;
        }
     }
-    if(high<soloPair(handy))
-      return soloPair(handy))
-    else 
-      return high;
+    if(high<soloPair(handy)){
+      return soloPair(handy);}
+    else{ 
+      return high;}
   }
   return 0;
 }
@@ -185,37 +194,52 @@ card highCard(pile piley, player playery){
 }
 
 //given a hand, returns the designated value for the given hand.
-// RF = 135 SF = 120 Four = 105 FH = 90 Flush = 75 S = 60 Three = 45 DP = 30 SP = 15
+// RF = 900 SF = 800 Four = 700 FH = 600 Flush = 500 S = 400 Three = 300 DP = 200 SP = 100
 //returns 0 if only high card
 int getValue(player playery){
   hand handy = playery.h;
   if(straight(handy)){
     if(straightFlush(handy)){
       if(royalFlush(handy))
-        return 135;
-      return 120;
+        return 900;
+      return 800+handy.h[4].rank;
      }
-  return 60;
+  return 400+handy.h[4].rank;
   }
   if(soloPair(handy)){
     if(doublePair(handy))
-      return 30+doublePair(handy);
-    return 15+soloPair(handy);
+      return 200+doublePair(handy);
+    return 100+soloPair(handy);
   }
   if(three(handy)){
     if(fullHouse(handy))
-      return 90;
-    return 45;
+      return 600;
+    return 300+handy.h[2].rank;
   }
   if(four(handy)){
-    return 105;
+    return 700+handy.h[2].rank;
   }
   if(flush(handy)){
-    return 75;
+    return 500;
   }
   return 0;
 }
 
 int main(){
+	card cardy;
+  card cardy2;
+  card cardar[2] = {cardy, cardy2};
+  hand handy;
+	player p1;
+	player p2;
+  player p3;
+	p1 = (player){.c=cardar, .h=handy, .total=300, .high=cardy};
+  p2 = (player){.c=cardar, .h=handy, .total=450, .high=cardy};
+  p3 = (player){.c=cardar, .h=handy, .total=100, .high=cardy};
+	player players[3] = {p1, p2, p3};
+	int i;
+	for(i=0;i<2;i++){
+		printf("%u\n", players[i].total);
+	}
   return 0;
 }
