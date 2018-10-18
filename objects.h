@@ -22,10 +22,11 @@ typedef struct Hand hand;
 
 //Has 2 cards, a hand(the best hand) the hands value and a high card
 struct Player{
-  card c[2];
-  hand h;
-  int total;
+	card c[2];
   card high;
+  hand h;  
+	int id;
+	int h.total;
 };
 typedef struct Player player;
 
