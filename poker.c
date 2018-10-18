@@ -8,14 +8,14 @@ void sort_players(player players[3]){
   for(i = 0; i<2; i++){
     for(j=0; j<2-i; j++){
 			if(players[j].total == players[j+1].total){
-				if(players[j].h.h[0].rank>players[j+1].h.h[0].rank){
+				if(players[j].high.rank < players[j+1].high.rank){
 					temp = players[j];
           players[j] = players[j+1];
           players[j+1] = temp;
 				}
 			}
 			else{
-				if(players[j].total > players[j+1].total){
+				if(players[j].total < players[j+1].total){
 					temp = players[j];
           players[j] = players[j+1];
           players[j+1] = temp;
@@ -24,14 +24,37 @@ void sort_players(player players[3]){
 		}
   }
 }
-
+//picks the best hand for a player out of 21 possible hands
+hand pick_hand(hand handy[21]){
+	int i,j;
+	hand temp;
+	for(i = 0; i<20; i++){
+		for(j = 0; j<20-i; j++){
+			if(handy[j].total == handy[j+1].total){
+				if(handy[j].h[4].rank < handy[j+1].h[4].rank){
+					temp = handy[j];
+          handy[j] = handy[j+1];
+          handy[j+1] = temp;
+				}
+			}
+			else{
+				if(handy[j].total < handy[j+1].total){
+					temp = handy[j];
+          handy[j] = handy[j+1];
+          handy[j+1] = temp;
+				}
+			}
+		}
+	}
+	return handy[0];
+}
 //Sorts hand in ascending order. Makes finding pairs and straights easier
 void sort_hand(hand p){
   card temp;
   int i,j;
   for(i = 0; i<4; i++){
     for(j = 0; j<5-i-1; j++){
-      if(p.h[j].rank<p.h[j+1].rank){
+      if(p.h[j].rank>p.h[j+1].rank){
         temp = p.h[j];
         p.h[j] = p.h[j+1];
 				p.h[j+1] = temp;
@@ -196,8 +219,7 @@ card highCard(pile piley, player playery){
 //given a hand, returns the designated value for the given hand.
 // RF = 900 SF = 800 Four = 700 FH = 600 Flush = 500 S = 400 Three = 300 DP = 200 SP = 100
 //returns 0 if only high card
-int getValue(player playery){
-  hand handy = playery.h;
+int getValue(hand handy){
   if(straight(handy)){
     if(straightFlush(handy)){
       if(royalFlush(handy))
