@@ -224,7 +224,7 @@ int getValue(player playery){
   }
   return 0;
 }
-int count = 0;
+int count;
 
 void makehandsHelper(card ca[], card temp[], int start, int end, int in, int k, hands) { 
 	if (in == k) { 
@@ -235,75 +235,181 @@ void makehandsHelper(card ca[], card temp[], int start, int end, int in, int k, 
 		count++;
       return; 
    } 
-   int i;
-   for (i = start; i<=end && end-i+1>=k-in; i++){ 
-       temp[in] = ca[i]; 
-       makehands(ca, temp, i+1, end, in+1, k,hands); 
-   } 
+	int i;
+	for (i = start; (i<=end)&&(end-i+1>=k-in); i++){ 
+		temp[in] = ca[i]; 
+		makehands(ca, temp, i+1, end, in+1, k,hands); 
+	} 
 } 
 void makehands(card ca[], int n, int k, hand hands[]) {  
-    card temp[k]; 
-    makehandsHelper(ca, temp, 0, n-1, 0, k, hands); 
+	count = 0;
+	card temp[k]; 
+	makehandsHelper(ca, temp, 0, n-1, 0, k, hands); 
 } 
 int main(){
+	char game1[32];
+	char game2[32];
+	char game3[32];
 	FILE *fp = fopen("example.txt", "r");
-	char inputfile[32];
-	fgets(inputfile, 32, fp);
+	fgets(game1, 32, fp);
+	fgets(game2, 32, fp);
+	fgets(game3, 32, fp);
 	fclose(fp);
-	player p1, p2, p3;
-	pile pi;
+	player p1, p2, p3, p4, p5, p6, p7, p8, p9;
+	pile pi, pi2, pi3;
 	//changes the face cards into number values for easier comparing later
 	int i;
 	for(i = 0; i<32; i++) {
-		if(c[i].equals('J')){
-			c[i] = 11;
+		if(game1[i].equals('J')){
+			game1[i] = '11';
 		}
-		if(c[i].equals('Q')){
-			c[i] = 12;
+		if(game1[i].equals('Q')){
+			game1[i] = '12';
 		}
-		if(c[i].equals('K')){
-			c[i] = 13;
+		if(game1[i].equals('K')){
+			game1[i] = '13';
 		}
-		if(c[i].equals('A')){
-			c[i] = 14;
+		if(game1[i].equals('A')){
+			game1[i] = '14';
 		}
 	}
-	//assigns the players cards and the piles cards
-	p1.c[0].suit = c[0];
-	p1.c[0].rank = c[1];
-	p1.c[1].suit = c[3];
-	p1.c[1].rank = c[4];
-	
-	p2.c[0].suit = c[6];
-	p2.c[0].rank = c[7];
-	p2.c[1].suit = c[9];
-	p2.c[1].rank = c[10];
-	
-	p3.c[0].suit = c[12];
-	p3.c[0].rank = c[13];
-	p3.c[1].suit = c[15];
-	p3.c[1].rank = c[16];
+	for(i = 0; i<32; i++) {
+		if(game2[i].equals('J')){
+			game2[i] = '11';
+		}
+		if(game2[i].equals('Q')){
+			game2[i] = '12';
+		}
+		if(game2[i].equals('K')){
+			game2[i] = '13';
+		}
+		if(game2[i].equals('A')){
+			game2[i] = '14';
+		}
+	}
+	for(i = 0; i<32; i++) {
+		if(game3[i].equals('J')){
+			game3[i] = '11';
+		}
+		if(game3[i].equals('Q')){
+			game3[i] = '12';
+		}
+		if(game3[i].equals('K')){
+			game3[i] = '13';
+		}
+		if(game3[i].equals('A')){
+			game3[i] = '14';
+		}
+	}
 
-	pi.p[0].suit = c[18];
-	pi.p[0].rank = c[19];
-	pi.p[1].suit = c[21];
-	pi.p[1].rank = c[22];
-	pi.p[2].suit = c[24];
-	pi.p[2].rank = c[25];
-	pi.p[3].suit = c[27];
-	pi.p[3].rank = c[28];
-	pi.p[4].suit = c[30];
-	pi.p[4].rank = c[31];
+	//assigns the players cards and the piles cards
+	p1.c[0].suit = game1[0];
+	p1.c[0].rank = game1[1];
+	p1.c[1].suit = game1[3];
+	p1.c[1].rank = game1[4];
+	
+	p2.c[0].suit = game1[6];
+	p2.c[0].rank = game1[7];
+	p2.c[1].suit = game1[9];
+	p2.c[1].rank = game1[10];
+	
+	p3.c[0].suit = game1[12];
+	p3.c[0].rank = game1[13];
+	p3.c[1].suit = game1[15];
+	p3.c[1].rank = game1[16];
+
+	pi.p[0].suit = game1[18];
+	pi.p[0].rank = game1[19];
+	pi.p[1].suit = game1[21];
+	pi.p[1].rank = game1[22];
+	pi.p[2].suit = game1[24];
+	pi.p[2].rank = game1[25];
+	pi.p[3].suit = game1[27];
+	pi.p[3].rank = game1[28];
+	pi.p[4].suit = game1[30];
+	pi.p[4].rank = game1[31];
 	
 	card ca1[7] = {p1[0], p1[1], pi[0], pi[1], pi[2], pi[3], pi[4]};
-	card ca2[7] = {p2[0], p2[1], pi[0], pi[1], pi[2], pi[3], pi[4]}
-	card ca3[7] = {p3[0], p3[1], pi[0], pi[1], pi[2], pi[3], pi[4]}
+	card ca2[7] = {p2[0], p2[1], pi[0], pi[1], pi[2], pi[3], pi[4]};
+	card ca3[7] = {p3[0], p3[1], pi[0], pi[1], pi[2], pi[3], pi[4]};
 	hand hands1[21];
 	makehands(ca1, 7, 5, hands1);
 	hand hands2[21];
 	makehands(ca2, 7, 5, hands2);
 	hand hands3[21];
 	makehands(ca3, 7, 5, hands3);
+	
+	p4.c[0].suit = game2[0];
+	p4.c[0].rank = game2[1];
+	p4.c[1].suit = game2[3];
+	p4.c[1].rank = game2[4];
+	
+	p5.c[0].suit = game2[6];
+	p5.c[0].rank = game2[7];
+	p5.c[1].suit = game2[9];
+	p5.c[1].rank = game2[10];
+	
+	p6.c[0].suit = game2[12];
+	p6.c[0].rank = game2[13];
+	p6.c[1].suit = game2[15];
+	p6.c[1].rank = game2[16];
+
+	pi2.p[0].suit = game2[18];
+	pi2.p[0].rank = game2[19];
+	pi2.p[1].suit = game2[21];
+	pi2.p[1].rank = game2[22];
+	pi2.p[2].suit = game2[24];
+	pi2.p[2].rank = game2[25];
+	pi2.p[3].suit = game2[27];
+	pi2.p[3].rank = game2[28];
+	pi2.p[4].suit = game2[30];
+	pi2.p[4].rank = game2[31];
+	
+	card ca4[7] = {p4[0], p4[1], pi2[0], pi2[1], pi2[2], pi2[3], pi2[4]};
+	card ca5[7] = {p5[0], p5[1], pi2[0], pi2[1], pi2[2], pi2[3], pi2[4]};
+	card ca6[7] = {p6[0], p6[1], pi2[0], pi2[1], pi2[2], pi2[3], pi2[4]};
+	hand hands4[21];
+	makehands(ca4, 7, 5, hands4);
+	hand hands5[21];
+	makehands(ca5, 7, 5, hands5);
+	hand hands6[21];
+	makehands(ca6, 7, 5, hands6);
+	
+	p7.c[0].suit = game3[0];
+	p7.c[0].rank = game3[1];
+	p7.c[1].suit = game3[3];
+	p7.c[1].rank = game3[4];
+	
+	p8.c[0].suit = game3[6];
+	p8.c[0].rank = game3[7];
+	p8.c[1].suit = game3[9];
+	p8.c[1].rank = game3[10];
+	
+	p9.c[0].suit = game3[12];
+	p9.c[0].rank = game3[13];
+	p9.c[1].suit = game3[15];
+	p9.c[1].rank = game3[16];
+
+	pi3.p[0].suit = game3[18];
+	pi3.p[0].rank = game3[19];
+	pi3.p[1].suit = game3[21];
+	pi3.p[1].rank = game3[22];
+	pi3.p[2].suit = game3[24];
+	pi3.p[2].rank = game3[25];
+	pi3.p[3].suit = game3[27];
+	pi3.p[3].rank = game3[28];
+	pi3.p[4].suit = game3[30];
+	pi3.p[4].rank = game3[31];
+	
+	card ca7[7] = {p7[0], p7[1], pi3[0], pi3[1], pi3[2], pi3[3], pi3[4]};
+	card ca8[7] = {p8[0], p8[1], pi3[0], pi3[1], pi3[2], pi3[3], pi3[4]};
+	card ca9[7] = {p9[0], p9[1], pi3[0], pi3[1], pi3[2], pi3[3], pi3[4]};
+	hand hands7[21];
+	makehands(ca7, 7, 5, hands7);
+	hand hands8[21];
+	makehands(ca8, 7, 5, hands8);
+	hand hands9[21];
+	makehands(ca9, 7, 5, hands9);
 	
 	card cardy;
   card cardy2;
