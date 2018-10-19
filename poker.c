@@ -68,12 +68,13 @@ hand* pick_hand(hand handy[21]){
 	return p;
 }
 //Sorts hand in ascending order. Makes finding pairs and straights easier
-void sort_hand(hand p){
+void sort_hand(hand p[5]){
   int i,j;
+	card temp;
   for(i = 0; i<4; i++){
     for(j = 0; j<4-i; j++){
-      if(p.h[j].rank>p.h[j+1].rank){
-				swapC(&p.h[j], &p.h[j+1]);
+      if(p[j].rank>p[j+1].rank){
+				swapC(&(p[j]), &(p[j+1]));
       } 
     }
   }
@@ -91,7 +92,7 @@ int straight(hand handy){
   if(start = 2 && handy.h[4].rank == 14){
     sum++;
 		handy.h[4].rank = 1;
-		sort_hand(handy);
+		sort_hand(handy.h);
 	}
   if(sum == 5)
     return 1;
@@ -356,11 +357,11 @@ int main(){
 		
 		int z;
 		for(z = 0; z<21; z++){
-			sort_hand(hands1[z]);	
+			sort_hand(hands1->h[z]);	
 			//hands1[z].total = getValue(hands1[z]);
-			sort_hand(hands2[z]);
+			sort_hand(hands2->h[z]);
 			//hands2[z].total = getValue(hands2[z]);
-			sort_hand(hands3[z]);
+			sort_hand(hands3->h[z]);
 			//hands3[z].total = getValue(hands3[z]);
 		}	
 		int test, testy;
